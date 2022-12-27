@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Preview</title>
+</head>
+<body>
+  <h1>Image Preview</h1>
+  <input type="file" id="image-input" accept="image/*">
+  <div id="image-preview"></div>
+
+  <script>
+    const imageInput = document.getElementById('image-input');
+    const imagePreview = document.getElementById('image-preview');
+
+    imageInput.addEventListener('change', function() {
+      // Check if a file was selected
+      if (this.files && this.files[0]) {
+        // Create a new FileReader object
+        const reader = new FileReader();
+
+        // Set the onload event of the reader
+        reader.onload = function(e) {
+          // Set the src attribute of the image preview
+          imagePreview.innerHTML = `<img src="${e.target.result}" alt="Image Preview">`;
+        }
+
+        // Read the selected file as data URL
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
